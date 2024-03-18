@@ -1,0 +1,27 @@
+﻿@model WebBanSach_62133314.Models.Customer
+@{
+    Layout = "~/Views/Shared/_LoginRegister.cshtml";
+}
+
+
+
+<form action="@Url.Action("Login", "Home_62133314")" method="post">
+    @Html.AntiForgeryToken()
+    <h3>Đăng nhập </h3>
+
+    <span>Tên đăng nhập</span>
+    <input type="email" class="box" placeholder="enter your email" id="EmailCus" name="EmailCus">
+
+    <span>Mật khẩu </span>
+    <input type="password" class="box" placeholder="enter your password" id="PassCus" name="PassCus">
+
+    <div class="checkbox">
+        <input type="checkbox" name="" id="remember-me">
+        <label for="remember-me">Lưu lần tiếp theo</label>
+    </div>
+
+    <input type="submit" value="sign in" class="btn-primary btn btn-block" />
+
+    <p> Quên mật khẩu ? <a href="#">Đặt lại</a></p>
+    <p>Không có tài khoản ? <a href="Register">Tạo tài khoản</a></p>
+</form>

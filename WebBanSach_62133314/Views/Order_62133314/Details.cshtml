@@ -1,0 +1,59 @@
+﻿@model WebBanSach_62133314.Models.OrderPro
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<dl class="dl-horizontal">
+    <dt>Ngày đặt hàng</dt>
+    <dd>@Model.DateOrder</dd>
+
+    <dt>Địa chỉ nhận hàng</dt>
+    <dd>@Model.AddressDeliverry</dd>
+
+    <dt>Tên khách hàng</dt>
+    <dd>@Model.Customer.NameCus</dd>
+</dl>
+
+<h3 class="text-center text-uppercase">Danh sách sản phẩm</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var orderDetail in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@orderDetail.Product.NamePro</td>
+                    <td>@orderDetail.Quantity</td>
+                    <td>@orderDetail.UnitPrice.ToString() VNĐ</td>
+                    <td>@(orderDetail.Quantity * orderDetail.UnitPrice) VNĐ</td>
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right"><strong>Tổng cộng:</strong></td>
+                <td>
+                    <strong>
+                        @Model.OrderDetails.Sum(item => item.Product.Price * item.Quantity).ToString() VNĐ
+                    </strong>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <p>
+        @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+</div>
+

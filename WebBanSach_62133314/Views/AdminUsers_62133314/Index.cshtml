@@ -1,0 +1,128 @@
+﻿@model List<WebBanSach_62133314.Models.AdminUser>
+@{
+    ViewBag.Title = "Danh sách người dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Tên người dùng
+                </th>
+                <th>
+                    Quyền
+                </th>
+                <th>
+                    Thao tác
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleUser)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" }) |
+                    
+                        <button class="delete-button btn btn-danger" data-id="@item.ID" data-target="#deleteModal">
+                            Xóa
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- Form xác nhận xóa -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa phòng ban này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hiển thị thông báo lỗi -->
+<div id="error-message" class="alert alert-danger" style="display:none;"></div>
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.querySelectorAll('.delete-button');
+            var confirmDeleteButton = document.getElementById('confirmDelete');
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            var errorMessage = document.getElementById('error-message');
+
+            deleteButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var dataId = button.getAttribute('data-id');
+                    confirmDeleteButton.setAttribute('data-id', dataId);
+                    deleteModal.show();
+                });
+            });
+
+            confirmDeleteButton.addEventListener('click', function () {
+                var dataId = confirmDeleteButton.getAttribute('data-id');
+                fetch('/AdminUsers_62133314/Delete/' + dataId, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Lỗi không phản hồi.');
+                        }
+                    })
+                    .then(function (data) {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            errorMessage.innerHTML = data.message;
+                            errorMessage.style.display = 'block';
+                            setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                            }, 3000);
+                        }
+                    })
+                    .catch(function (error) {
+                        errorMessage.innerHTML = error.message;
+                        errorMessage.style.display = 'block';
+                        setTimeout(function () {
+                            errorMessage.style.display = 'none';
+                        }, 3000);
+                    })
+                    .finally(function () {
+                        deleteModal.hide();
+                    });
+            });
+        });
+    </script>
+}

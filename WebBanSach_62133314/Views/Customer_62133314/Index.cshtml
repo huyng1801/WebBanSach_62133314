@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebBanSach_62133314.Models.Customer>
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Địa chỉ email
+            </th>
+            <th>Thao tác</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneCus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailCus)
+                </td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDCus }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebBanSach_62133314.Models.OrderPro>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Ngày đặt hàng
+            </th>
+            <th>
+                Địa chỉ nhận hàng
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Thao tác
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressDeliverry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.NameCus)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Chi tiết", "Details", "Order_62133314", new { id = item.ID }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

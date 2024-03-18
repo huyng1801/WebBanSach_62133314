@@ -1,0 +1,60 @@
+﻿DROP DATABASE  IF EXISTS WebBanSach_62133314
+GO
+CREATE DATABASE WebBanSach_62133314
+GO
+USE WebBanSach_62133314
+GO
+CREATE TABLE AdminUser (
+    ID INT IDENTITY (1, 1) NOT NULL,
+    NameUser NVARCHAR (100) NULL,
+    RoleUser NVARCHAR (20) NULL,
+    PasswordUser NCHAR (50) NULL,
+    PRIMARY KEY(ID)
+);
+GO
+CREATE TABLE Category (
+    IDCate INT IDENTITY (1, 1) NOT NULL,
+    NameCate NVARCHAR (100) NULL,
+    PRIMARY KEY(IDCate)
+);
+GO
+CREATE TABLE Customer (
+    IDCus INT IDENTITY (1, 1) NOT NULL,
+    NameCus NVARCHAR (100) NULL,
+    PhoneCus NVARCHAR (15)  NULL,
+    EmailCus NVARCHAR (100) NULL,
+	AddressCus NVARCHAR(255) NOT NULL,
+	PassCus NVARCHAR(200) NOT NULL
+    PRIMARY KEY(IDCus)
+);
+GO
+CREATE TABLE Products (
+    ProductID INT IDENTITY(1,1) NOT NULL,
+    NamePro NVARCHAR (100)  NULL,
+    DecriptionPro NVARCHAR (200)  NULL,
+    IDCate INT NULL,
+    Price BIGINT NULL,
+	ImagePro NTEXT  NULL,
+    PRIMARY KEY(ProductID),
+    CONSTRAINT FK_Pro_Category FOREIGN KEY (IDCate) REFERENCES Category (IDCate)
+);
+GO
+CREATE TABLE OrderPro (
+    ID INT IDENTITY (1, 1) NOT NULL,
+    DateOrder DATE NULL,
+    IDCus INT NULL,
+    AddressDeliverry NVARCHAR (200) NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY (IDCus) REFERENCES Customer (IDCus)
+);
+GO
+CREATE TABLE OrderDetail (
+    ID INT IDENTITY (1, 1) NOT NULL,
+    IDProduct INT NULL,
+    IDOrder   INT NULL,
+    Quantity  INT NULL,
+	UnitPrice BIGINT NULL,
+    PRIMARY KEY(ID),
+    FOREIGN KEY (IDProduct) REFERENCES Products (ProductID),
+    FOREIGN KEY (IDOrder) REFERENCES OrderPro (ID)
+);

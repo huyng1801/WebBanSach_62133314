@@ -1,0 +1,11 @@
+﻿
+@if (ViewBag.user != null)
+{
+    <a href="@Url.Action("Login", "Home")">Hi, @ViewBag.user.NameCus</a>
+    <a href="@Url.Action("Logout", "Home")"><i class="fa-solid fa-right-from-bracket"></i></a>
+}
+else
+{
+    <a href="@Url.Action("Login", "Home")" class="fas fa-user"></a>
+}
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c0aa0e568cc549d288c311e05568af1e" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.AdminUser" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.Category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.Customer" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.OrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.OrderPro" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSach_62133314Model.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="WebBanSach_62133314Model.FK_Pro_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSach_62133314Model.FK__OrderPro__IDCus__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSach_62133314Model.FK__OrderDeta__IDOrd__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSach_62133314Model.FK__OrderDeta__IDPro__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,43 @@
+﻿@model WebBanSach_62133314.Models.Product
+
+@{
+    ViewBag.Title = "Chi Tiết Sản Phẩm";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml"; // Provide the correct layout path if needed
+}
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <img src="~/Content/Images/@Model.ImagePro" class="img-fluid" alt="@Model.NamePro" />
+        </div>
+        <div class="col-md-6">
+            <p class="h2">Tên Sản Phẩm: @Model.NamePro</p>
+            <br />
+            <p class="h2">Giá: @String.Format("{0:#,##0}", Model.Price) VNĐ</p>
+
+
+
+            <br />
+            <p class="h2">Mô tả sản phẩm: @Model.DecriptionPro</p>
+            <br />
+
+            <!-- Quantity Selection -->
+            <label for="quantity">Số lượng:</label>
+            <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control" />
+            <br />
+
+            @Html.ActionLink("Thêm vào giỏ hàng", "AddToCart", "Home_62133314", new { productId = Model.ProductID }, new { @class = "btn btn-danger", id = "addToCartBtn" })
+        </div>
+    </div>
+</div>
+
+<script>
+    // Optionally, you can add a script to handle the quantity change event and update the link accordingly.
+    document.getElementById('quantity').addEventListener('change', function () {
+        var quantity = this.value;
+        var addToCartLink = document.getElementById('addToCartBtn');
+        addToCartLink.href = '@Url.Action("AddToCart", "Home_62133314")' + '?productId=' + @Model.ProductID + '&quantity=' + quantity;
+    });
+</script>

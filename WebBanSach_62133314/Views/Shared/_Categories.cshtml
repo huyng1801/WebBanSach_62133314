@@ -1,0 +1,10 @@
+﻿@using WebBanSach_62133314.Models
+<div class="dropdown">
+    <a href="#" class="dropbtn">Thể loại </a>
+    <div class="dropdown-content">
+        @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
+        {
+            @Html.ActionLink(category.NameCate, "TheLoai", "Home_62133314", new { categoryName = category.NameCate }, null)
+        }
+    </div>
+</div>

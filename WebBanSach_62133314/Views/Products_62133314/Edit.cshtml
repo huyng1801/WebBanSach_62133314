@@ -1,0 +1,68 @@
+﻿@model WebBanSach_62133314.Models.Product
+
+@{
+    ViewBag.Title = "Chỉnh sửa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    @using (Html.BeginForm("Edit", "Products_62133314", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ProductID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NamePro, "Tên sách", new { @class = "col-md-2 control-label my-3" })
+
+        @Html.EditorFor(model => model.NamePro, new { htmlAttributes = new { @class = "form-control", required = true } })
+        @Html.ValidationMessageFor(model => model.NamePro, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DecriptionPro, "Mô tả", new { @class = "col-md-2 control-label my-3" })
+
+        @Html.EditorFor(model => model.DecriptionPro, new { htmlAttributes = new { @class = "form-control", required = true } })
+        @Html.ValidationMessageFor(model => model.DecriptionPro, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDCate, "Loại sách", new { @class = "col-md-2 control-label my-3" })
+
+        @Html.DropDownList("IDCate", ViewBag.Category as SelectList, htmlAttributes: new { @class = "form-control", required = true })
+        @Html.ValidationMessageFor(model => model.IDCate, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, "Đơn giá", new { @class = "col-md-2 control-label my-3" })
+
+        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", required = true } })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Hình ảnh", new { @class = "col-md-2 control-label my-3" })
+        <div>
+            <input type="file" name="ImagePro" />
+            @Html.ValidationMessageFor(model => model.ImagePro, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+            @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    </div>
+</div>
+    }
+
+

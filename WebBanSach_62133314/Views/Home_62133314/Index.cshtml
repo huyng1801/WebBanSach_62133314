@@ -1,0 +1,123 @@
+﻿@model List<WebBanSach_62133314.Models.Product>
+@{
+    ViewBag.Title = "TrangChu";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!--______________________HOME____________________________________-->
+<section class="home" id="Home">
+
+    <div id="demo" class="carousel slide " data-bs-ride="carousel">
+
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/home1 .jpg" alt="" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/home2.jpg" alt="" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/home3.jpg" alt="" class="d-block" style="width:100%">
+            </div>
+        </div>
+
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</section>
+
+<!--______________________ICONS____________________________________-->
+<section class="icons-container">
+    <div class="icons">
+        <i class="fas fa-plane"></i>
+        <div class="content">
+            <h3>mien phi giao hang</h3>
+            <p>don tren 300.000</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-lock"></i>
+        <div class="content">
+            <h3>thanh toan </h3>
+            <p>thanh toan an toan 100%</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-redo-alt"></i>
+        <div class="content">
+            <h3>de dang hoan hang</h3>
+            <p>trong vong 10 ngay</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-headset"></i>
+        <div class="content">
+            <h3>ho tro 24/7</h3>
+            <p>goi bat cu khi nao</p>
+        </div>
+    </div>
+</section>
+
+
+@{
+    var groupedProducts = Model.GroupBy(p => p.Category).ToList();
+}
+<!-- Loop through each category and its products -->
+@foreach (var group in groupedProducts)
+{
+    <section class="featured" id="featured">
+        <h1 class="heading"><span>@group.First().Category.NameCate</span></h1>
+        <div class="featured-slider">
+            <div class="wrapper">
+                @foreach (var product in group)
+                {
+                    <div class="box">
+                        <div class="icons">
+                            <a href="" class="fas fa-search"></a>
+                            <a href="" class="fas fa-heart"></a>
+                            <a href="" class="fas fa-shopping-cart"></a>
+                        </div>
+                        <div class="image">
+                            <img src="~/Content/Images/@product.ImagePro" alt="">
+                        </div>
+                        <div class="content">
+                            <h3>@product.NamePro</h3>
+                            <div class="price">@String.Format("{0:#,##0}", product.Price) VNĐ<span> @String.Format("{0:#,##0}", product.Price)</span> VNĐ</div>
+                            <a class="btn btn-primary" href="@Url.Action("ChiTietSanPham", "Home_62133314", new { productId = product.ProductID })">Chi Tiết</a>
+                            @Html.ActionLink("Thêm vào giỏ hàng", "AddToCart", "Home_62133314", new { productId = product.ProductID }, new { @class = "btn-danger btn" })
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "LienHe";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link href="~/Content/styleContact.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>
+        <p>
+            Địa chỉ: quận 1 phường 2<br />
+            Email: <a href="mailto:Chamsockh@gmail.com">Chamsockh@gmail.com</a><br />
+            Điện thoại: <a href="tel:1234567890">Hotline 123-456-7890</a><br />
+
+
+        </p>
+    </h1>
+
+    <h2 align="center">Liên hệ với chúng tôi</h2>
+    <center>
+        <form name="frmLienHe" id="frmLienHe" method="post" action="#">
+            <input type="hidden" name="token" value="$N@nT@ng" />
+            <table border="1" cellspacing="0" cellpadding="10" width="600">
+                <tr>
+                    <td colspan="2" align="center">
+                        <img src="~/images/lienhe.jpg" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Gửi lời nhắn đến Chúng tôi !
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label>Họ tên của bạn</label><br />
+                        <input type="text" name="txtHoTen" id="txtHoTen" size="80" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Địa chỉ email của bạn</label><br />
+                        <input type="text" name="txtEmail" id="txtEmail" size="30" required />
+                    </td>
+                    <td>
+                        <label>Số điện thoại của bạn</label><br />
+                        <input type="text" name="txtDienThoai" id="txtDienThoai" size="30" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label>Nhập lời nhắn của bạn</label><br />
+                        <textarea name="txtLoiNhan" id="txtLoiNhan" rows="10" cols="80"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Bạn muốn chúng tôi liên hệ lại bạn bằng phương thức nào?<br />
+                        <input type="checkbox" name="chkPhuongThuocLienHe" id="chkPhuongThuocLienHe_1" value="0" /> Qua Điện thoại
+                        <input type="checkbox" name="chkPhuongThuocLienHe" id="chkPhuongThuocLienHe_2" value="1" /> Qua Email
+                        <input type="checkbox" name="chkPhuongThuocLienHe" id="chkPhuongThuocLienHe_3" value="2" /> Qua Tài khoản trên trang web
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Bạn có Đồng ý cho phép chúng tôi thu thập thông tin tài khoản của bạn không?<br />
+                        <input type="radio" name="rdDongYThuThap" id="rdDongYThuThap_1" value="N" /> Không
+                        <input type="radio" name="rdDongYThuThap" id="rdDongYThuThap_2" value="Y" /> Có
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="btnGoiLoiNhan" id="btnGoiLoiNhan" value="Gửi lời nhắn" onclick="HienThi()" />
+                        <input type="reset" name="btnNhapMoi" id="btnNhapMoi" value="Nhập mới" onclick="HienThi1()" />
+
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+
+
+</html>
+<script>
+    function HienThi() {
+        alert("Lời nhắn của bạn đã được gửi thành công!")
+    }
+    function HienThi1() {
+        alert("Mời bạn nhập lại!")
+    }</script>

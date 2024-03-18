@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<dl class="dl-horizontal">
+    <dt>Mã khách hàng</dt>
+    <dd>@ViewBag.Customer.IDCus </dd>
+
+    <dt>Tên khách hàng</dt>
+    <dd>@ViewBag.Customer.NameCus</dd>
+
+    <dt>Số điện thoại</dt>
+    <dd>@ViewBag.Customer.PhoneCus</dd>
+
+    <dt>Email</dt>
+    <dd>@ViewBag.Customer.EmailCus</dd>
+    <dt>Địa chỉ</dt>
+    <dd>@ViewBag.Customer.AddressCus</dd>
+</dl>
+
+<h3 class="text-center">Danh sách đơn hàng</h3>
+
+@Html.Partial("_PartialViewOrder")

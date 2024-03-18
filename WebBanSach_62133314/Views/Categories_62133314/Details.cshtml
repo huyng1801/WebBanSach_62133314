@@ -1,0 +1,78 @@
+﻿@model WebBanSach_62133314.Models.Category
+
+@{
+    ViewBag.Title = "Chi tiết thể loại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Mã thể loại
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IDCate)
+        </dd>
+
+        <dt class="col-sm-2">
+            Tên thể loại
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NameCate)
+        </dd>
+    </dl>
+
+    <h3 class="text-center text-uppercase">Danh sách sản phẩm thuộc thể loại này</h3>
+
+    @if (Model.Products.Any())
+    {
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Tên sản phẩm
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Thể loại
+            </th>
+          
+        </tr>
+
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/Images/@item.ImagePro" alt="@item.NamePro" height="60">
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamePro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.NameCate)
+                </td>
+                
+            </tr>
+        }
+
+    </table>
+</div>
+    }
+    else
+    {
+        <p>Không có sản phẩm nào thuộc thể loại này.</p>
+    }
+
+    <div>
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary"})
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model List<WebBanSach_62133314.Models.Product>
+@{
+    ViewBag.Title = "TieuThuyet";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+
+<section class="featured" id="featured">
+    <h1 class="heading"><span>@ViewBag.CategoryName</span></h1>
+    <div class="featured-slider">
+        <div class="wrapper">
+            @foreach (var product in Model)
+            {
+                <div class="box">
+                    <div class="icons">
+                        <a href="" class="fas fa-search"></a>
+                        <a href="" class="fas fa-heart"></a>
+                        <a href="" class="fas fa-shopping-cart"></a>
+                    </div>
+                    <div class="image">
+                        <img src="~/Content/Images/@product.ImagePro" alt="@product.NamePro">
+                    </div>
+                    <div class="content">
+                        <h3>@product.NamePro</h3>
+                        <div class="price">@String.Format("{0:#,##0}", product.Price) VNĐ<span> @String.Format("{0:#,##0}", product.Price)</span></div>
+                        <a class="btn btn-primary" href="@Url.Action("ChiTietSanPham", "Home_62133314", new { productId = product.ProductID })">Chi Tiết</a>
+                        @Html.ActionLink("Thêm vào giỏ hàng", "AddToCart", "Home_62133314", new { productId = product.ProductID }, new { @class = "btn-danger btn" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

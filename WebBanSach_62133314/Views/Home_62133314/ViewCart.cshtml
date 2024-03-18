@@ -1,0 +1,77 @@
+﻿@model List<WebBanSach_62133314.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="container">
+    <h2>Giỏ hàng</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <p>@ViewBag.Message</p>
+    }
+    else
+    {
+        <div class="cart-items">
+            @foreach (var item in Model)
+            {
+                <div class="cart-item">
+                    <div class="product-info">
+                        <div class="product-name">Tên sản phẩm: @item.Product.NamePro</div>
+                        <img src="~/Content/Images/@item.Product.ImagePro" alt="@item.Product.NamePro" width="250" />
+                        <div class="quantity">
+                            Số lượng:
+                            <button class="btn btn-sm btn-secondary" onclick="adjustQuantity(@item.Product.ProductID, -1)">-</button>
+                            <span id="quantity-@item.Product.ProductID">@item.Quantity</span>
+                            <button class="btn btn-sm btn-secondary" onclick="adjustQuantity(@item.Product.ProductID, 1)">+</button>
+                        </div>
+
+                        <div class="unit-price">Đơn giá: @item.UnitPrice VNĐ</div>
+                        <div class="total">Tổng tiền: @String.Format("{0:#,##0}", item.Quantity * item.UnitPrice) VNĐ</div>
+                    </div>
+                    <div class="remove-button">
+                        <a href="@Url.Action("RemoveFromCart", "Home_62133314", new { productId = item.Product.ProductID })" class="remove-button">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+        </div>
+        <div class="cart-summary">
+            <div class="total-amount">
+                <span>Tổng cộng:</span>
+                <span>@string.Format("{0:#,##0}", Model.Sum(item => item.Quantity * item.UnitPrice)) VNĐ</span>
+
+            </div>
+            <div class="checkout-button">
+                @Html.ActionLink("Thanh toán", "ThanhToan", "Home_62133314", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+
+</div>
+<script>
+    function adjustQuantity(productId, change) {
+        var quantityElement = document.getElementById("quantity-" + productId);
+        var currentQuantity = parseInt(quantityElement.innerText);
+        var newQuantity = Math.max(currentQuantity + change, 1);
+
+        fetch('@Url.Action("AdjustQuantity", "Home_62133314")?productId=' + productId + '&quantity=' + newQuantity, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json()) 
+        .then(data => {
+            quantityElement.innerText = data.quantity;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
